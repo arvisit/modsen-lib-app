@@ -1,0 +1,3 @@
+[submodule "modsen-book-service"]
+	path = modsen-book-service
+	url = git@github.com:arvisit/modsen-book-service.git
