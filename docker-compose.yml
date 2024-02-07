@@ -13,7 +13,10 @@ services:
     networks:
       - lib_app_network
     depends_on:
-      - db-book-service
+      db-book-service:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
 
   db-book-service:
     image: postgres:15-alpine
@@ -34,6 +37,21 @@ services:
       - 5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - lib_app_network
+
+  config-server:
+    build: modsen-config-server
+    image: modsen-config-server
+    container_name: config-server
+    restart: always
+    healthcheck:
+      test: wget -qO- http://localhost:8071/actuator/health
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - 8071:8071
     networks:
       - lib_app_network
 
