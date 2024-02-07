@@ -1,0 +1,6 @@
+[submodule "modsen-book-service"]
+	path = modsen-book-service
+	url = git@github.com:arvisit/modsen-book-service.git
+[submodule "modsen-exception-handling-starter"]
+	path = modsen-exception-handling-starter
+	url = git@github.com:arvisit/modsen-exception-handling-starter.git
