@@ -8,6 +8,7 @@ services:
       DB_URL: jdbc:postgresql://db-book-service:5432/book-service-db
       DB_USERNAME: postgres
       DB_PASSWORD: root
+      CONFIG_SERVER_URL: http://config-server:8071
     ports:
       - 8080:8080
     networks:
