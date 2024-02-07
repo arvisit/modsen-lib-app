@@ -10,5 +10,6 @@
     <modules>
         <module>modsen-book-service</module>
         <module>modsen-exception-handling-starter</module>
+        <module>modsen-configs</module>
     </modules>
 </project>
