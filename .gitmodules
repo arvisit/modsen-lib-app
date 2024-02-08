@@ -10,3 +10,6 @@
 [submodule "modsen-config-server"]
 	path = modsen-config-server
 	url = git@github.com:arvisit/modsen-config-server.git
+[submodule "modsen-discovery-server"]
+	path = modsen-discovery-server
+	url = git@github.com:arvisit/modsen-discovery-server.git
