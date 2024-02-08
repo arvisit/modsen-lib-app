@@ -1,3 +1,7 @@
+x-eureka-variables: &eureka-variables
+  EUREKA_HOSTNAME: discovery-server
+  EUREKA_PORT: 8070
+
 services:
   book-service:
     build: modsen-book-service
@@ -8,7 +12,7 @@ services:
       DB_URL: jdbc:postgresql://db-book-service:5432/book-service-db
       DB_USERNAME: postgres
       DB_PASSWORD: root
-      CONFIG_SERVER_URL: http://config-server:8071
+      <<: *eureka-variables
     ports:
       - 8080:8080
     networks:
@@ -17,6 +21,8 @@ services:
       db-book-service:
         condition: service_healthy
       config-server:
+        condition: service_healthy
+      discovery-server:
         condition: service_healthy
 
   db-book-service:
@@ -51,8 +57,28 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    environment:
+      <<: *eureka-variables
     ports:
       - 8071:8071
+    networks:
+      - lib_app_network
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+
+  discovery-server:
+    image: modsen-discovery-server
+    build: modsen-discovery-server
+    container_name: discovery-server
+    restart: always
+    healthcheck:
+      test: wget -qO- http://localhost:8070/actuator/health
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - 8070:8070
     networks:
       - lib_app_network
 
