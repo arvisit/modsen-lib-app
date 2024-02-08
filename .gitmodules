@@ -4,3 +4,9 @@
 [submodule "modsen-exception-handling-starter"]
 	path = modsen-exception-handling-starter
 	url = git@github.com:arvisit/modsen-exception-handling-starter.git
+[submodule "modsen-configs"]
+	path = modsen-configs
+	url = git@github.com:arvisit/modsen-configs.git
+[submodule "modsen-config-server"]
+	path = modsen-config-server
+	url = git@github.com:arvisit/modsen-config-server.git
