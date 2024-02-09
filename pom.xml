@@ -13,5 +13,6 @@
         <module>modsen-configs</module>
         <module>modsen-config-server</module>
         <module>modsen-discovery-server</module>
+        <module>modsen-security-server</module>
     </modules>
 </project>
