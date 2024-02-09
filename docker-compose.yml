@@ -64,6 +64,10 @@ services:
       DB_URL: jdbc:postgresql://db-security-service:5432/security-service-db
       DB_USERNAME: postgres
       DB_PASSWORD: root
+      JWT_SECRET: cofZUlayEW6vaGKwVDt5uNzr4vNWUg1F1BiPQe_EShfo4fT6oea1JzkYTpqT27pC
+      CORS_ALLOWED_HEADER: none
+      CORS_ALLOWED_METHOD: none
+      CORS_ALLOWED_ORIGIN: none
       <<: *eureka-variables
     ports:
       - 8082:8080
