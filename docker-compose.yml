@@ -2,6 +2,11 @@ x-eureka-variables: &eureka-variables
   EUREKA_HOSTNAME: discovery-server
   EUREKA_PORT: 8070
 
+x-cors-variables: &cors-variables
+  CORS_ALLOWED_HEADER: none
+  CORS_ALLOWED_METHOD: none
+  CORS_ALLOWED_ORIGIN: none
+
 services:
   book-service:
     build: modsen-book-service
@@ -12,7 +17,7 @@ services:
       DB_URL: jdbc:postgresql://db-book-service:5432/book-service-db
       DB_USERNAME: postgres
       DB_PASSWORD: root
-      <<: *eureka-variables
+      <<: [*eureka-variables, *cors-variables]
     ports:
       - 8081:8080
     networks:
@@ -65,10 +70,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: root
       JWT_SECRET: cofZUlayEW6vaGKwVDt5uNzr4vNWUg1F1BiPQe_EShfo4fT6oea1JzkYTpqT27pC
-      CORS_ALLOWED_HEADER: none
-      CORS_ALLOWED_METHOD: none
-      CORS_ALLOWED_ORIGIN: none
-      <<: *eureka-variables
+      <<: [*eureka-variables, *cors-variables]
     ports:
       - 8082:8080
     networks:
