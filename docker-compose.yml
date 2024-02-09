@@ -53,6 +53,12 @@ services:
     build: modsen-security-service
     image: modsen-security-service
     container_name: security-service
+    restart: always
+    healthcheck:
+      test: wget -qO- http://localhost:8080/actuator/health
+      interval: 30s
+      timeout: 10s
+      retries: 5
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
       DB_URL: jdbc:postgresql://db-security-service:5432/security-service-db
