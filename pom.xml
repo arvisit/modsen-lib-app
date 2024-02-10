@@ -14,5 +14,6 @@
         <module>modsen-config-server</module>
         <module>modsen-discovery-server</module>
         <module>modsen-security-server</module>
+        <module>modsen-inner-filter-starter</module>
     </modules>
 </project>
