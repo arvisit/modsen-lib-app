@@ -13,3 +13,9 @@
 [submodule "modsen-discovery-server"]
 	path = modsen-discovery-server
 	url = git@github.com:arvisit/modsen-discovery-server.git
+[submodule "modsen-security-service"]
+	path = modsen-security-service
+	url = git@github.com:arvisit/modsen-security-service.git
+[submodule "modsen-inner-filter-starter"]
+	path = modsen-inner-filter-starter
+	url = git@github.com:arvisit/modsen-inner-filter-starter.git

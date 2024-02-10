@@ -2,6 +2,11 @@ x-eureka-variables: &eureka-variables
   EUREKA_HOSTNAME: discovery-server
   EUREKA_PORT: 8070
 
+x-cors-variables: &cors-variables
+  CORS_ALLOWED_HEADER: '*'
+  CORS_ALLOWED_METHOD: '*'
+  CORS_ALLOWED_ORIGIN: '*'
+
 services:
   book-service:
     build: modsen-book-service
@@ -12,9 +17,9 @@ services:
       DB_URL: jdbc:postgresql://db-book-service:5432/book-service-db
       DB_USERNAME: postgres
       DB_PASSWORD: root
-      <<: *eureka-variables
+      <<: [*eureka-variables, *cors-variables]
     ports:
-      - 8080:8080
+      - 8081:8081
     networks:
       - lib_app_network
     depends_on:
@@ -23,6 +28,8 @@ services:
       config-server:
         condition: service_healthy
       discovery-server:
+        condition: service_healthy
+      security-service:
         condition: service_healthy
 
   db-book-service:
@@ -42,8 +49,59 @@ services:
       - 5432:5432
     expose:
       - 5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+    networks:
+      - lib_app_network
+
+  security-service:
+    build: modsen-security-service
+    image: modsen-security-service
+    container_name: security-service
+    restart: always
+    healthcheck:
+      test: wget -qO- http://localhost:8082/actuator/health
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker"
+      DB_URL: jdbc:postgresql://db-security-service:5432/security-service-db
+      DB_USERNAME: postgres
+      DB_PASSWORD: root
+      JWT_SECRET: cofZUlayEW6vaGKwVDt5uNzr4vNWUg1F1BiPQe_EShfo4fT6oea1JzkYTpqT27pC
+      <<: [*eureka-variables, *cors-variables]
+    ports:
+      - 8082:8082
+    networks:
+      - lib_app_network
+    depends_on:
+      db-security-service:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+
+  db-security-service:
+    image: postgres:15-alpine
+    container_name: db-security-service
+    restart: always
+    healthcheck:
+      test: pg_isready -U postgres -d security-service-db
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: security-service-db
+    ports:
+      - 5431:5432
+    expose:
+      - 5432
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
     networks:
       - lib_app_network
 
@@ -82,8 +140,8 @@ services:
     networks:
       - lib_app_network
 
-volumes:
-  pgdata:
+#volumes:
+#  pgdata:
 
 networks:
   lib_app_network:
