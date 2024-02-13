@@ -22,3 +22,6 @@
 [submodule "modsen-library-service"]
 	path = modsen-library-service
 	url = git@github.com:arvisit/modsen-library-service.git
+[submodule "modsen-api-gateway"]
+	path = modsen-api-gateway
+	url = git@github.com:arvisit/modsen-api-gateway.git

@@ -16,5 +16,6 @@
         <module>modsen-security-server</module>
         <module>modsen-inner-filter-starter</module>
         <module>modsen-library-service</module>
+        <module>modsen-api-gateway</module>
     </modules>
 </project>
