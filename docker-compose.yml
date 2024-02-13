@@ -31,6 +31,8 @@ services:
         condition: service_healthy
       security-service:
         condition: service_healthy
+      library-service:
+        condition: service_healthy
 
   db-book-service:
     image: postgres:15-alpine
@@ -47,6 +49,58 @@ services:
       POSTGRES_DB: book-service-db
     ports:
       - 5432:5432
+    expose:
+      - 5432
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+    networks:
+      - lib_app_network
+
+  library-service:
+    build: modsen-library-service
+    image: modsen-library-service
+    container_name: library-service
+    restart: always
+    healthcheck:
+      test: wget -qO- http://localhost:8083/actuator/health
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker"
+      DB_URL: jdbc:postgresql://db-library-service:5432/library-service-db
+      DB_USERNAME: postgres
+      DB_PASSWORD: root
+      <<: [*eureka-variables, *cors-variables]
+    ports:
+      - 8083:8083
+    networks:
+      - lib_app_network
+    depends_on:
+      db-library-service:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+      security-service:
+        condition: service_healthy
+
+  db-library-service:
+    image: postgres:15-alpine
+    container_name: db-library-service
+    restart: always
+    healthcheck:
+      test: pg_isready -U postgres -d library-service-db
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: library-service-db
+    ports:
+      - 5433:5432
     expose:
       - 5432
 #    volumes:
