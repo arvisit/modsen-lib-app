@@ -1,6 +1,6 @@
 # Library App
 
-Test task microservices application that imitates a library API where anonymous users can view info about books in the catalog, authorized users can view lists of books which are available, borrowed and borrow available ones, authorized administrators can manage books catalog, i.e. perform CRUD operations, change borrowed books status to available, view info about particular borrowed book. When a new book is added to the catalog it automatically becomes available to borrow.
+Test task microservices REST application that imitates a library and provide an API for anonymous users to view info about books in the catalog, for authorized users to view lists of books which are available, borrowed and to borrow available ones, for authorized administrators to manage books catalog, i.e. perform CRUD operations, change borrowed books status to available, view info about particular borrowed book. When a new book is added to the catalog it automatically becomes available to borrow.
 
 ## Contents
 
@@ -119,7 +119,7 @@ Separate pages:
 
 Usage of the Library App endpoints can be performed via following `curl` requests or via [Swagger UI](http://localhost:8080/webjars/swagger-ui/index.html)
 
-**Note!** Some of the bellow requests contain placeholder `<TOKEN>` for the JWT token. To successfully perform these requests actual token should be provided.To obtain a token user should [authenticate](#security-service) himself via username and password. This token should be transfered within header 'Authorization' as 'Bearer <TOKEN>' like this:
+**Note!** Some of the bellow requests contain placeholder `<TOKEN>` for the JWT token. To successfully perform these requests actual token should be provided. To obtain a token, user should [authenticate](#security-service) himself via username and password. This token should be transfered within header 'Authorization' as 'Bearer <TOKEN>' like this:
 
 ```
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuZXdfdXNlckBtYWlsLmNvbSIsImlhdCI6MTcwNzUyMTQ4MiwiZXhwIjoxNzA3NTI1MDgyLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXX0.FE2f8fXkz4MtFz7iq_dvYolcQ3JazrK04NnJIA3OIw7xjgOX7GC5kjnieCi9DZvzuHz0KhCt3NMWTDS0-Fghvg
