@@ -1,6 +1,6 @@
 # Library App
 
-Test task microservices REST application that imitates a library and provide an API for anonymous users to view info about books in the catalog, for authorized users to view lists of books which are available, borrowed and to borrow available ones, for authorized administrators to manage books catalog, i.e. perform CRUD operations, change borrowed books status to available, view info about particular borrowed book. When a new book is added to the catalog it automatically becomes available to borrow.
+Test task microservices REST application that imitates a library and provides an API for anonymous users to view info about books in the catalog, for authorized users to view lists of books which are available, borrowed and to borrow available ones, for authorized administrators to manage books catalog, i.e. perform CRUD operations, change borrowed books status to available, view info about particular borrowed book. When a new book is added to the catalog it automatically becomes available to borrow.
 
 ## Contents
 
