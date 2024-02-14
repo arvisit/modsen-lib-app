@@ -292,7 +292,7 @@ Add new book
 curl -i -X POST -H "Content-Type: application/json" \
     -H "Authorization: Bearer <TOKEN>" \
     -d '{ 
-        "id": "b0cd8da5-3bcf-44b5-85fb-19639f484b89", 
+        "id": "b0cd8da5-3bcf-44b5-85fb-19639f484b89"
      }' \
      'http://localhost:8080/api/v1/library/books'
 ```
