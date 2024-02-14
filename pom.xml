@@ -13,7 +13,7 @@
         <module>modsen-configs</module>
         <module>modsen-config-server</module>
         <module>modsen-discovery-server</module>
-        <module>modsen-security-server</module>
+        <module>modsen-security-service</module>
         <module>modsen-inner-filter-starter</module>
         <module>modsen-library-service</module>
         <module>modsen-api-gateway</module>
