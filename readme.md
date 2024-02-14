@@ -97,6 +97,7 @@ Run the following commands to clone the repository together with submodules, bui
 
 ```
 git clone --recurse-submodules git@github.com:arvisit/modsen-lib-app.git
+cd modsen-lib-app
 docker compose up --build
 ```
 
